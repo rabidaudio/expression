@@ -3,13 +3,17 @@
 //TODO 
 
 
-Generalize JSON manifest
+---Generalize JSON manifest
 
-create package.json
+----create package.json
 
 Add Authentication
 
-add get query option
+add logging
+
+add auto-docs
+
+??????add get query option
 
 
 

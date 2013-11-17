@@ -1,0 +1,27 @@
+doctype 5
+
+//name, args, cmd, methods
+html(lang="en")
+  head
+    title= Documentation
+    script(src="//code.jquery.com/jquery-1.9.1.js")
+    script(src="//code.jquery.com/ui/1.10.3/jquery-ui.js")
+    script(src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js")
+    style(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css")
+    style(rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap-theme.min.css")
+    style.
+        .res {
+            font-style:italic;
+            padding-left: 15pt;
+            font-size: larger;
+            font-family: mono;
+        }
+  body
+    h1#title Documentation
+    #container.col
+        #row.row
+            div.col-md-8
+                h3= 'Resource:'
+                    span.res= '/'+name
+                a(id="1")
+        
