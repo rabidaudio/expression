@@ -100,3 +100,18 @@ add get query option
 /*app.param(':id', function(d){
     return parseInt(d);
 });*/
+
+
+
+/*app.get( '/wrek/:date?', function(req, res){
+    wrek.dir_handle(req, res);
+}); //DIR method
+
+app.post('/wrek', function(req, res){ wrek.post_handle(req, res); } );     //POST method
+*/
+
+//var wrek = new scriptmaster.Script(config.scripts[0]);
+//var wrek = new scriptmaster.Script();
+//console.log(wrek.script);
+
+//console.log(resources);

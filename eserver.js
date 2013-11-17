@@ -4,33 +4,26 @@ var scriptmaster = require('./scriptmaster');
 
 //express settings
 var app = express();
-app.set('port', process.env.PORT || 3000);
-app.use(express.bodyParser());//for POST
+//app.set('port', process.env.PORT || 3000);
+app.use(express.bodyParser()); //for POST
 
 //scripts
-var resources = [];
 for( var i=0; i<config.scripts.length; i++ ){
-    resources[i] = new scriptmaster.Script(config.scripts[i]);
-    app.get( '/'+resources[i].script.name+'/:date?' ,
-                                        function(req, res){
-        resources[i].dir_handle(req,res);
-    });
-    app.pist( '/'+resources[i].script.name ,
-                                        function(req, res){
-        resources[i].post_handle(req,res);
-    });
+    var scriptname = config.scripts[i].name;
+    var args="";
+    for (var j=0; j<config.scripts[i].args.required.length; j++)
+        args = args +"/:"+ config.scripts[i].args.required[j];
+    for (var k=0; k<config.scripts[i].args.optional.length; k++)
+        args = args +"/:"+ config.scripts[i].args.optional[k] + '?';
+    //This is some fuckedup repugnant shit
+    eval( 'var '+ scriptname +' = new scriptmaster.Script(config.scripts[i]);' );
+    eval('app.get( \'/\'+'+scriptname+'.script.name+args , function(req, res){'+scriptname+'.dir_handle(req,res);});');
+    eval('app.post( \'/\'+'+scriptname+'.script.name , function(req, res){'+scriptname+'.post_handle(req,res); });');
 }
-//var wrek = new scriptmaster.Script(config.scripts[0]);
-//var wrek = new scriptmaster.Script();
-//console.log(wrek.script);
+
+console.log(app.routes);
+
+app.listen(3000);
 
 
-app.listen();
 
-
-/*app.get( '/wrek/:date?', function(req, res){
-    wrek.dir_handle(req, res);//This is some fuckedup repugnant shit
-}); //DIR method
-
-app.post('/wrek', function(req, res){ wrek.post_handle(req, res); } );     //POST method
-*/
