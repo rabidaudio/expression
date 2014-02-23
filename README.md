@@ -1,10 +1,8 @@
 expression
 ==========
 
-An Express (Node.js) wrapper to turn command line
--------------------------------------------------
-programs into full web APIs. 
-----------------------------
+An Express (Node.js) wrapper to turn command line programs into full web APIs. 
+-----------------------------------------------------------------------------
 
 Simply include a JSON configuration file to define your functions
 and arguments:
