@@ -70,26 +70,32 @@ function dblog(req, func, e){
 
 
 //scripts
+var scripts = {};
 for( var i=0; i<config.scripts.length; i++ ){
-    var scriptname = config.scripts[i].name;
+    var scriptname = config.scripts[i].app_name;
     var args="";
     for (var j=0; j<config.scripts[i].args.required.length; j++)
         args = args +"/:"+ config.scripts[i].args.required[j];
     for (var k=0; k<config.scripts[i].args.optional.length; k++)
         args = args +"/:"+ config.scripts[i].args.optional[k] + '?';
+    scripts[scriptname] = new scriptmaster.Script(config.scripts[i]);
+    app.get('/'+scriptname+args, scripts[scriptname].rest_handle);
+    app.post('/'+scriptname, scripts[scriptname].post_handle);
     //This is some fuckedup repugnant shit
-    eval( 'var '+ scriptname +' = new scriptmaster.Script(config.scripts[i]);' );
-    eval('app.get( \'/\'+'+scriptname+'.script.name+args , function(req, res){ dblog(req, \''+scriptname+'\', false);  '+scriptname+'.dir_handle(req,res);});');
-    eval('app.post( \'/\'+'+scriptname+'.script.name , function(req, res){ dblog(req, \''+scriptname+'\', false); '+scriptname+'.post_handle(req,res); });');
+    //eval( 'var '+ scriptname +' = new scriptmaster.Script(config.scripts[i]);' );
+    //eval('app.get( \'/\'+'+scriptname+'.script.name+args , function(req, res){ dblog(req, \''+scriptname+'\', false);  '+scriptname+'.rest_handle(req,res);});');
+    //eval('app.post( \'/\'+'+scriptname+'.script.name , function(req, res){ dblog(req, \''+scriptname+'\', false); '+scriptname+'.post_handle(req,res); });');
 }
+console.log(scripts);
+console.log(app.routes);
 
 //docs
 app.get('/docs', function(req, res){
-    res.render('docs.jade', config.scripts[0]);
+    res.render('docs.jade', {name: config.scripts});//{scripts: config.scripts});
 });
 
 app.use(function(req, res, next){
-  dblog(req, '', true);
+  //dblog(req, '', true);
   res.send(404, '{error: "Unknown request."}');
 });
 

@@ -1,3 +1,21 @@
+,
+    {
+        name: "ohai",
+        args: {
+            required: ['name'],
+            optional: []
+        },
+        cmd: 'python app/ohai.py',
+        methods: {
+            rest: true,
+            post: true,
+            get: false
+        }
+    }
+
+
+
+
 
 
 //TODO 
