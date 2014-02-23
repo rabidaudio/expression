@@ -1,22 +1,11 @@
-expression
-==========
-
-An Express (Node.js) wrapper to turn command line programs into full web APIs. 
------------------------------------------------------------------------------
-
-Simply include a JSON configuration file to define your functions
-and arguments:
-
-```javascript
-
 exports.scripts = [
     {
-        app_name: "wrek",               //Resource
+        app_name: "date",               //Resource
          args: {                    //Aruguments list
             required: [],
             optional: ['date']
         },
-        cmd: 'ruby app/wrek.rb',    //Command to run program
+        cmd: 'ruby app/date.rb',    //Command to run program
         methods: {                  //connectivity methods
             rest: true,
             post: true,
@@ -37,8 +26,3 @@ exports.scripts = [
         }
     }
 ];
-```
-
-scripts is an array of objects
-
-Initally built at HackDuke 2013 as part of a (larger project)[http://github.com/jaxoncreed/N/] in 24 hours.
